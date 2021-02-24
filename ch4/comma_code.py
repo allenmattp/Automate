@@ -1,25 +1,23 @@
 #! python3
 
 """
-https://automatetheboringstuff.com/2e/chapter3/
-Automate the Boring Stuff Chapter 3 Practice Project
+https://automatetheboringstuff.com/2e/chapter4/
+Automate the Boring Stuff Chapter 4 Practice Project:
+Comma Code
 """
+spam = ['apples', 'bananas', 'tofu', 'cats']
+list = [1, 2, 3, 4, 5, 6]
+empty = []
 
-def collatz(number):
-    if not number % 2:
-        print(number // 2)
-        return number // 2
-    elif number % 2:
-        print(3 * number + 1)
-        return 3 * number + 1
+def comma_code(list):
+    string = ""
+    for i in range(len(list)):
+        if i != (len(list) - 1):
+            string += str(list[i]) + ", "
+        else:
+            string += "and " + str(list[i])
+    print(string)
 
-if __name__ == '__main__':
-    user_int = 0
-    while not user_int:
-        try:
-            user_int = int(input("Enter an integer to explore the Collatz sequence:\n"))
-        except ValueError:
-            print("Enter an INTEGER.")
-    number = collatz(user_int)
-    while number != 1:
-        number = collatz(number)
+comma_code(spam)
+comma_code(list)
+comma_code(empty)
