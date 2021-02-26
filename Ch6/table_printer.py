@@ -5,13 +5,18 @@ tableData = [['apples', 'oranges', 'cherries', 'banana'],
 def printTable(list):
     c_width = 0
     for row in list:
-        p_list = []
-        for str in row:
+        for str in row:                             # find the longest word to correctly set column width
             if len(str) > c_width:
                 c_width = len(str)
-            p_list.append(str)
-        for str in p_list:
-            print(str.rjust(c_width))
+    for row in list:
+        for i in range(len(row)):                   # gets number of items in each row
+            c_list = []
+            for j in range(len(list)):              # gets the number of inner lists
+                c_list.append(list[j][i])           # pull appropriate string from each inner list
+            for c in c_list:
+                print(c.rjust(c_width), end=" ")    # prints item "i" from each inner list
+            print("")
+        break                                       # iterated through all items already
 
 
 printTable(tableData)
