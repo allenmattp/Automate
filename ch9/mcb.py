@@ -15,12 +15,14 @@ import sys, pyperclip, shelve, pprint
 def main():
 
     mcbShelf = shelve.open("mcb")
+
     while True:
 
         key_list = pprint.pformat(list(mcbShelf.keys()))
         print("Current keywords:")
         print(key_list, "\n")
 
+        # store user's input as a lowercase list
         entry = str(input(
     """
 Please make your selection:\n
