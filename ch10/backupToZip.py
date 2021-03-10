@@ -3,25 +3,31 @@
 # into a ZIP file whose filename increments.
 
 import zipfile, os
+from pathlib import Path
 
 
 def backupToZip(folder):
     # Back up the entire contents of parameter "folder" into a ZIP file
 
     folder = os.path.abspath(folder)    # arg for folder should be absolute path
+    print(folder)
+
+    # create Path variable for the folder
+    home = Path(folder)
 
     # Determine filename increment
     number = 1
     while True:
         zipFilename = os.path.basename(folder) + "_" + str(number) + ".zip"
-        if not os.path.exists(zipFilename):
+        file = home / zipFilename
+        if not file.is_file():
             break
         number += 1
 
     # Create the ZIP file.
     print(f"Creating {zipFilename} ...")
-    backupZip = zipfile.ZipFile(zipFilename, "w")
-
+    p = Path.joinpath(home, zipFilename)
+    backupZip = zipfile.ZipFile(p, "w")
 
 
     # Walk the entire folder tree and compress the files in each folder
@@ -41,4 +47,5 @@ def backupToZip(folder):
 
 
 if __name__ == '__main__':
-    backupToZip("C:\\delicious")
+    folderToBackup = input("Enter the absolute path:\n")
+    backupToZip(folderToBackup)
