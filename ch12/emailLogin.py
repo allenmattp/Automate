@@ -62,7 +62,7 @@ finally:
     subjectElem.send_keys(subject)
 
     textboxElem = nextElem(subjectElem)
-    message = pyperclip.paste() # will send whatever is currently on clipboard
+    message = pyperclip.paste() # will send active clipboard; replace with input if you want to send something else
     textboxElem.send_keys(message)
 
     sendElem = nextElem(textboxElem)
