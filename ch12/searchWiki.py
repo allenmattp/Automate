@@ -1,5 +1,5 @@
 #! python3
-# searchpypi.py - Opens several search results
+# searchwiki.py - Searches wiki and either opens top 5 results or the returned wiki page
 
 import requests, sys, webbrowser, bs4
 
