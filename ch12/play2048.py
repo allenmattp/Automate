@@ -1,5 +1,6 @@
 #! python3
 # play the 2048 game using an up, right, down, left strategy
+# plays x number of games
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -9,7 +10,7 @@ driver.get("https://play2048.co/")
 
 htmlElem = driver.find_element_by_tag_name("html")
 
-def play():
+def play_dumb():
     gameOver = []
     while len(gameOver) < 1:    # keep pressing keys until game over message
         gameOver = driver.find_elements_by_class_name("game-message.game-over")
@@ -20,7 +21,7 @@ def play():
 
 count = 0
 while count < 100:
-    play()
+    play_dumb()
     count += 1
     retryElem = driver.find_element_by_class_name("retry-button")
     retryElem.click()
