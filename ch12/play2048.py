@@ -8,12 +8,26 @@ driver = webdriver.Firefox()
 driver.get("https://play2048.co/")
 
 htmlElem = driver.find_element_by_tag_name("html")
-gameOver = driver.find_elements_by_class_name("game-message game-over")
+count = 0
 
-while len(gameOver) < 1:
-    htmlElem.send_keys(Keys.UP)
-    htmlElem.send_keys(Keys.RIGHT)
-    htmlElem.send_keys(Keys.DOWN)
-    htmlElem.send_keys(Keys.LEFT)
+def play():
+    gameOver = []
+    count = 0
+    while count < 100:  # keep playing for n rounds
+        while len(gameOver) < 1:    # keep pressing keys until game over message
+            gameOver = driver.find_elements_by_class_name("game-message.game-over")
+            htmlElem.send_keys(Keys.UP)
+            htmlElem.send_keys(Keys.RIGHT)
+            htmlElem.send_keys(Keys.DOWN)
+            htmlElem.send_keys(Keys.LEFT)
 
-driver.quit()
+        count += 1
+
+        retryElem = driver.find_element_by_class_name("retry-button")
+        retryElem.click()
+        play()
+
+    bestScore = driver.find_elements_by_class_name("best-container")  # find high score
+    print(f"Computer played {count} games and managed a high score of {bestScore[0].text}")
+
+play()
