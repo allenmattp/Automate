@@ -23,7 +23,7 @@ for ws in sheets:
         else:                               # otherwise use the xlsx name + column number
             title = f"{xlsxFile}_{c}"
         # write file
-        with open(f"{title}.txt", "w") as txt:
+        with open(f"{title}_{ws.title}.txt", "w") as txt:
             for r in range(2, row_count + 1):
                 txt.write(str(ws.cell(row=r, column=c).value) + "\n")
         txt.close()
