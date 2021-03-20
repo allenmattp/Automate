@@ -51,7 +51,8 @@ def main():
         row_count = 2
         for row in values:
             if int(row[2]) != (int(row[0]) * int(row[1])):
-                print(f"Row {row_count} needs verification: Found {row[2]}, expected {int(row[0]) * int(row[1])}")
+                print(f"Row {row_count} needs verification: "
+                      f"Found {row[2]}, expected {int(row[0]) * int(row[1])}")
             row_count += 1
 
 if __name__ == '__main__':
