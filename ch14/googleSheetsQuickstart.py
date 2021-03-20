@@ -9,12 +9,13 @@ from google.oauth2.credentials import Credentials
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
-SAMPLE_RANGE_NAME = 'Class Data!A2:E'
+# Bean Counter Spreadsheet from Automate
+SAMPLE_SPREADSHEET_ID = '1jDZEdvSIh4TmZxccyy0ZXrH-ELlrwq8_YYiZrEOB4jg'
+SAMPLE_RANGE_NAME = 'Sheet!A2:C'    # skip header
 
 def main():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
+    """Connects to Sheets API
+    Checks whether column C = column A * column B as it should.
     """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -37,6 +38,7 @@ def main():
     service = build('sheets', 'v4', credentials=creds)
 
     # Call the Sheets API
+    # Search for
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
@@ -45,10 +47,12 @@ def main():
     if not values:
         print('No data found.')
     else:
-        print('Name, Major:')
+        print('Validating data ...')
+        row_count = 2
         for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s, %s' % (row[0], row[4]))
+            if int(row[2]) != (int(row[0]) * int(row[1])):
+                print(f"Row {row_count} needs verification: Found {row[2]}, expected {int(row[0]) * int(row[1])}")
+            row_count += 1
 
 if __name__ == '__main__':
     main()
