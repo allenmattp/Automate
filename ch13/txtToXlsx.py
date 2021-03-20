@@ -22,6 +22,7 @@ with open(txtFile, "r") as txt:
             col_count += 1
         line = txt.readline()
         row_count += 1
+    txt.close()
 
 wb.save(xlsxFile + ".xlsx")
 
