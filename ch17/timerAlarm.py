@@ -19,6 +19,6 @@ print(waitTime, startTime, endTime)
 print(f"Waiting for {waitTime} minute(s) ...")
 while datetime.datetime.now() < endTime:
     time.sleep(60)
-    print(f"{endTime - datetime.datetime.now()} remaining")     # comment out or adjust time.sleep
+    print(f"{str(endTime - datetime.datetime.now())[:7]} remaining")     # comment out or adjust time.sleep
 
 ctypes.windll.user32.MessageBoxW(0, "Time has expired!", "Alert", 1)
