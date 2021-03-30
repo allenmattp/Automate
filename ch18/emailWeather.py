@@ -44,6 +44,8 @@ password = passwordGen.passGen()
 
 conn.login("allenmattpdev@gmail.com", password)
 
-conn.sendmail("allenmattpdev@gmail.com", "allen.mattp@gmail.com",
+conn.sendmail("allenmattpdev@gmail.com", "allenmattp@gmail.com",
               "Subject: Weather Report\n\n" +
               emailBody)
+
+conn.quit()
