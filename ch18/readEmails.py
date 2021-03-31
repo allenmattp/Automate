@@ -32,10 +32,11 @@ for i in range(len(UIDs)):
     message = pyzmail.PyzMessage.factory(rawMessage[marker][b"BODY[]"])
     print(message.get_addresses("from"))
     print(message.get_subject())
-    if message.text_part:
+    if message.text_part is not None:
         print(message.text_part.get_payload().decode(message.text_part.charset))
-    if message.html_part:
+    if message.html_part is not None:
         print(message.html_part.get_payload().decode(message.html_part.charset))
+    print("\n\n***** NEW MESSAGE *****\n\n")
 
 # logout
 conn.logout()
