@@ -1,5 +1,5 @@
 #! python3
-# getOpenWeather.py - Emails weather report to specified address
+# emailWeather.py - Emails weather report to specified address
 
 import openWeatherAPI
 
