@@ -1,3 +1,6 @@
+#! python3
+# sendAlert.py - send an email with optional subject/message
+
 import smtplib, passwordGen
 
 
