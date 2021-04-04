@@ -1,31 +1,39 @@
+#! python3
+# runFromEmail.py - Check inbox for an email with "Subject" and "password".
+# If found, perform some task.
+
 import imapclient, passwordGen, pyzmail, subprocess
 from datetime import datetime
 
-# grab my app password so I don't upload it to github
+# grab password from somewhere else so it's not uploaded it to github
 password = passwordGen.passGen()
 
 # sign into IMAP server
 conn = imapclient.IMAPClient("imap.gmail.com", ssl=True)
 conn.login("allenmattpdev@gmail.com", password)
 
-# only need to look at recent emails, so create variable for today's date
+# only want to check recent emails, so create a variable for today's date
 today = datetime.date(datetime.today())
 
-conn.select_folder("INBOX", readonly=False)
+conn.select_folder("INBOX", readonly=False)         # CAUTION: readonly=False
 UIDs = conn.search(["SINCE", today])
-print(UIDs)
 
+# Search through all of today's emails in inbox
 for i in range(len(UIDs)):
     rawMessage = conn.fetch([UIDs[i]], ["BODY[]", "FLAGS"])
     marker = UIDs[i]
     message = pyzmail.PyzMessage.factory(rawMessage[marker][b"BODY[]"])
-    if message.get_subject() == "Execute Order":    # Look for this phrase
+
+    # check subject line for trigger phrase
+    if message.get_subject() == "Execute Order":
         body = message.text_part.get_payload().decode(message.text_part.charset)
-        if body.find("password"):                   # For security... include a password in the body of email
-            subprocess.Popen("C:\\Users\\Wizard\\PycharmProjects\\bat files\\rainCheck.bat") # some process
 
-        conn.delete_messages([UIDs[i]])   # Delete message so it doesn't trigger on next check
+        # check for secret password and, if found, run some process
+        if body.find("password"):
+            subprocess.Popen("C:\\Users\\Wizard\\PycharmProjects\\bat files\\rainCheck.bat")
+
+        # Delete message so it doesn't trigger on next check
+        conn.delete_messages([UIDs[i]])
         conn.expunge()
-
 
 conn.logout()
