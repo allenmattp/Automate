@@ -11,7 +11,7 @@ import json, requests, pprint, smtplib, passwordGen
 from datetime import datetime
 
 # location for weather
-location = "Seattle, US"    # future project: pull location from lat/lon or vice versa
+location = "Seattle"    # future project: pull location from lat/lon or vice versa
 lat = 47.6062
 lon = -122.3321
 
@@ -37,7 +37,6 @@ for h in weatherData["hourly"]:
         desc = h["weather"][0]["description"]
         dt = int(h["dt"])
         alerts.append(f"Watch out for a {desc} {datetime.utcfromtimestamp(dt).strftime('%A about %I:%M %p')}\n\n")
-    #print(w)
 
 # collect daily forecast
 daily = []
