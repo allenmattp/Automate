@@ -7,6 +7,8 @@ import pyautogui, time, webbrowser
 webbrowser.open('https://autbor.com/form')
 print('Ensure that the browser window is active and the form is loaded!')
 
+pyautogui.PAUSE = 0.5
+
 # data to enter into form
 # could be pulled from another source if desired
 # source must begin with "w", "a", "d" or "m"
@@ -46,7 +48,6 @@ for data in formData:
     pyautogui.write(data["fear"] + "\t")
 
     # Type first letter of Wizard Source to select it in dropdown
-    pyautogui.PAUSE = 0.25
     pyautogui.write(data["source"][0])
     pyautogui.write("\t")
 
@@ -63,12 +64,11 @@ for data in formData:
     pyautogui.write(data["comments"] + "\t")
 
     # Click Submit
-    pyautogui.PAUSE = 0.5
     pyautogui.press("enter")
 
     # Allow time for form to submit
     print("Form submitted.")
-    time.sleep(1)
+    time.sleep(2)
 
     # Click the Submit another response link
     pyautogui.write("\t")
