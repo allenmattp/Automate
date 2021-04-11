@@ -12,7 +12,7 @@ os.popen(command)
 time.sleep(2)
 
 # switch audio device
-pyautogui.write(["alt", "a", "down", "right", "down", "enter"], 0.1)
+pyautogui.write(["alt", "a", "down", "right", "down", "enter"])
 
 # close
 sys.exit()
