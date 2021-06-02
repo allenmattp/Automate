@@ -11,15 +11,15 @@ import json, requests, pprint, smtplib, passwordGen
 from datetime import datetime
 
 # location for weather
-location = "Seattle"    # future project: pull location from lat/lon or vice versa
+"""location = "Seattle"    # future project: pull location from lat/lon or vice versa
 lat = 47.6062
 lon = -122.3321
-"""location = "Minneapolis"
+location = "Minneapolis"
 lat = 44.9778
-lon = -93.2650
+lon = -93.2650"""
 location = "Hanover"
 lat = 43.7022
-lon = -72.2896"""
+lon = -72.2896
 
 # Download the JSON data from OpenWeatherMap.org's API
 url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=minutely&units=imperial&APPID={APPID}"
